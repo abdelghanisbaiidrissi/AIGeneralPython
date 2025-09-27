@@ -25,7 +25,7 @@
 
 # Imports python modules
 from time import time, sleep
-
+import os
 # Imports print functions that check the lab
 from print_functions_for_lab_checks import *
 
@@ -62,10 +62,14 @@ def main():
     #             get_pet_labels(in_arg.dir)
     # This function creates the results dictionary that contains the results, 
     # this dictionary is returned from the function call as the variable results
-    results = get_pet_labels(None)
+    image_dir = in_arg.dir
+    if not os.path.isdir(image_dir):
+        image_dir = r"D:\Repos\AIGeneralPython\data\pet_images"
+    
+    results = get_pet_labels(image_dir)
 
     # Function that checks Pet Images in the results Dictionary using results    
-    check_creating_pet_image_labels(results)
+    check_creating_pet_image_labels(None)
 
 
     # TODO 3: Define classify_images function within the file classiy_images.py

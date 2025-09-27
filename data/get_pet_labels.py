@@ -17,6 +17,8 @@
 #
 ##
 # Imports python modules
+from time import time, sleep
+import os
 from os import listdir
 
 # TODO 2: Define get_pet_labels function below please be certain to replace None
@@ -42,4 +44,25 @@ def get_pet_labels(image_dir):
     """
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+
+    
+    filename_list = listdir(image_dir)
+    results_dic = dict()
+
+    for idx in range(0, len(filename_list), 1):
+        if filename_list[idx].startswith("."):
+            continue
+
+        if filename_list[idx] not in results_dic:
+            results_dic[filename_list[idx]] = [get_label(filename_list[idx])]
+        
+
+    return results_dic
+
+def get_label(file_name):
+
+    file_name = os.path.splitext(file_name)[0]
+
+    result_label = " ".join([word for word in file_name.lower().split("_") if word.isalpha()])
+
+    return result_label
