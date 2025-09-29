@@ -69,7 +69,7 @@ def main():
     results = get_pet_labels(image_dir)
 
     # Function that checks Pet Images in the results Dictionary using results    
-    check_creating_pet_image_labels(None)
+    check_creating_pet_image_labels(results)
 
 
     # TODO 3: Define classify_images function within the file classiy_images.py
@@ -80,11 +80,10 @@ def main():
     #             classify_images(in_arg.dir, results, in_arg.arch)
     # Creates Classifier Labels with classifier function, Compares Labels, 
     # and adds these results to the results dictionary - results
-    classify_images(None, results, None)
+    classify_images(image_dir, results, in_arg.arch)
 
     # Function that checks Results Dictionary using results    
     check_classifying_images(results)    
-
     
     # TODO 4: Define adjust_results4_isadog function within the file adjust_results4_isadog.py
     # Once the adjust_results4_isadog function has been defined replace 'None' 
