@@ -71,11 +71,11 @@ def classify_images(images_dir, results_dic, model):
         path = os.path.join(images_dir, filename)
         if os.path.isfile(path):
             classifier_res = classifier(path, model).lower()
+            labels = [label.strip() for label in classifier_res.split(',')]
             pet_label = results_dic[filename][0]
-            match_flag = 1 if pet_label in classifier_res else 0
+            match_flag = 1 if pet_label in labels else 0
             results_dic[filename].extend([classifier_res, match_flag])  
         else:
             print(f"file: {path}, was not found.")
-
     None    
      

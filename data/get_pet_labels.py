@@ -44,8 +44,7 @@ def get_pet_labels(image_dir):
     """
     # Replace None with the results_dic dictionary that you created with this
     # function
-
-    
+        
     filename_list = listdir(image_dir)
     results_dic = dict()
 
@@ -54,8 +53,7 @@ def get_pet_labels(image_dir):
             continue
 
         if filename_list[idx] not in results_dic:
-            results_dic[filename_list[idx]] = [get_label(filename_list[idx])]
-        
+            results_dic[filename_list[idx]] = [get_label(filename_list[idx]).strip()]
 
     return results_dic
 
