@@ -70,4 +70,53 @@ def calculates_results_stats(results_dic):
     """        
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+    results_stats_dic = {
+        'n_images': len(results_dic),
+        'n_dogs_img': 0,
+        'n_notdogs_img': 0,
+        'n_match': 0,
+        'n_correct_dogs': 0,
+        'n_correct_notdogs': 0,
+        'n_correct_breed': 0,
+        'pct_match': 0,
+        'pct_correct_dogs': 0,
+        'pct_correct_breed': 0,
+        'pct_correct_notdogs': 0
+    }
+
+    #Pet Label is a dog: results_dic[key][3] = 1
+    
+    for key in results_dic:
+        
+        if results_dic[key][3]:
+            results_stats_dic['n_dogs_img'] += 1
+
+        if results_dic[key][2]:
+            results_stats_dic['n_match'] += 1
+
+        if results_dic[key][3] and results_dic[key][4]:
+            results_stats_dic['n_correct_dogs'] += 1
+
+        if not results_dic[key][3] and not results_dic[key][4]:
+            results_stats_dic['n_correct_notdogs'] += 1
+
+        if results_dic[key][3] and results_dic[key][2]:
+            results_stats_dic['n_correct_breed'] += 1
+
+    #Number of not dog images: substract the number of dog images from the total of images 
+    results_stats_dic['n_notdogs_img'] = results_stats_dic['n_images'] - results_stats_dic['n_dogs_img']  
+
+    if results_stats_dic['n_images'] > 0:
+        results_stats_dic['pct_match'] = round(100 * results_stats_dic['n_match'] / results_stats_dic['n_images'], 2)
+
+    if results_stats_dic['n_dogs_img'] > 0: 
+        results_stats_dic['pct_correct_dogs'] = round(100 * results_stats_dic['n_correct_dogs'] / results_stats_dic['n_dogs_img'], 2)
+        results_stats_dic['pct_correct_breed'] = round(100 * results_stats_dic['n_correct_breed'] / results_stats_dic['n_dogs_img'], 2)
+
+    if results_stats_dic['n_notdogs_img'] > 0:
+        results_stats_dic['pct_correct_notdogs'] = round(100 * results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img'], 2)
+    
+    for k, v in results_stats_dic.items():
+        print(f"{k}: {v}")
+
+    return results_stats_dic
