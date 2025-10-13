@@ -62,5 +62,36 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
+    print(f"You are using the following model architecture for classification: {model}.")
+    print(f"Number of Images: {results_stats_dic['n_images']}.")
+    print(f"Number of Dog Images: {results_stats_dic['n_dogs_img']}.")
+    print(f"Number of \"Not-a\" Dog Image: {results_stats_dic['n_notdogs_img']}.")
+
+    for key in results_stats_dic:
+        if key.startswith('pct'):
+            labels = [label.capitalize() for label in key.split('_') if label != "pct"]
+            label_res = "% " + " ".join(labels) + ": "
+            print(label_res + f"{results_stats_dic[key]:.2f}")
+
+    if (print_incorrect_dogs and 
+        ((results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs']) != 
+         results_stats_dic['n_images'])
+        ):
+        incorrect_dogs = 0
+        for key in results_dic:
+            if results_dic[key][4] and not results_dic[key][3]:
+                incorrect_dogs += 1
+        print("Number of incorrect dogs: " + f"{incorrect_dogs}")
+
+
+    if (print_incorrect_breed and 
+        results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']
+        ):
+        incorrect_breeds = 0
+        for key in results_dic:
+            if results_dic[key][3] and not results_dic[key][2]:
+                incorrect_breeds += 1
+        print("Number of incorrect breeds: " + f"{incorrect_breeds}")
+
     None
                 

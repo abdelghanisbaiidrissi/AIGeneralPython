@@ -116,7 +116,4 @@ def calculates_results_stats(results_dic):
     if results_stats_dic['n_notdogs_img'] > 0:
         results_stats_dic['pct_correct_notdogs'] = round(100 * results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img'], 2)
     
-    for k, v in results_stats_dic.items():
-        print(f"{k}: {v}")
-
     return results_stats_dic
